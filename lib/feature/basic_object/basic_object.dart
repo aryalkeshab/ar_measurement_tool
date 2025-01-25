@@ -55,16 +55,6 @@ class Basic3DObjectPage extends StatelessWidget {
               style: const TextStyle(color: Colors.white, fontSize: 16),
               icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
             ),
-            // IconButton(
-            //   onPressed: () {
-            //     c.removeAllPreviousPositions();
-            //     c.update();
-            //   },
-            //   icon: const Icon(
-            //     Icons.replay_outlined,
-            //     color: Colors.white,
-            //   ),
-            // ),
           ],
         ),
         body: Builder(

@@ -1,4 +1,4 @@
-import 'package:ar_measurement_tool/core/pages.dart';
+import 'package:ar_measurement_tool/core/route/pages.dart';
 import 'package:ar_measurement_tool/feature/home/home_screen.dart';
 import 'package:ar_measurement_tool/feature/measurement/measure_page.dart';
 import 'package:flutter/material.dart';

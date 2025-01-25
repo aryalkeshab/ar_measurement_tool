@@ -63,6 +63,15 @@ class MeasurePage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+            IconButton(
+              onPressed: () {
+                c.loadMeasurements();
+              },
+              icon: const Icon(
+                Icons.download,
+                color: Colors.white,
+              ),
+            ),
           ],
         ),
         body: Builder(
@@ -75,6 +84,13 @@ class MeasurePage extends StatelessWidget {
                 )
               ],
             );
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue,
+          child: const Icon(Icons.save, color: Colors.white),
+          onPressed: () {
+            Get.find<MeasurementController>().saveMeasurements();
           },
         ),
       );
