@@ -2,6 +2,7 @@ import 'package:ar_measurement_tool/feature/basic_calibration/basic_calibration_
 import 'package:ar_measurement_tool/feature/basic_calibration/basic_calibration_page.dart';
 import 'package:ar_measurement_tool/feature/basic_object/basic_object.dart';
 import 'package:ar_measurement_tool/feature/basic_object/basic_object_controller.dart';
+import 'package:ar_measurement_tool/feature/googleml/object_detector_view.dart';
 import 'package:ar_measurement_tool/feature/home/home_controller.dart';
 import 'package:ar_measurement_tool/feature/home/home_screen.dart';
 import 'package:ar_measurement_tool/feature/measurement/measure_page.dart';
@@ -36,5 +37,9 @@ final List<GetPage> pages = <GetPage>[
     binding: BindingsBuilder(
       () => Get.lazyPut(() => BasicCalibrationController()),
     ),
+  ),
+  GetPage(
+    name: ObjectDetectorView.routeName,
+    page: () => ObjectDetectorView(),
   ),
 ];

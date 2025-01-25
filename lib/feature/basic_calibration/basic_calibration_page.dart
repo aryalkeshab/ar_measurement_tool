@@ -28,10 +28,16 @@ class BasicCalibrationPage extends StatelessWidget {
         ),
       ),
       body: GetBuilder<BasicCalibrationController>(builder: (c) {
-        return ARKitSceneView(
-          onARKitViewCreated: c.onARKitViewCreated,
-          showFeaturePoints: true,
-          planeDetection: ARPlaneDetection.horizontal,
+        return Stack(
+          children: [
+            ARKitSceneView(
+              onARKitViewCreated: c.onARKitViewCreated,
+              showFeaturePoints: true,
+              detectionImages: [],
+              planeDetection: ARPlaneDetection.horizontal,
+              configuration: ARKitConfiguration.worldTracking,
+            ),
+          ],
         );
       }),
     );
