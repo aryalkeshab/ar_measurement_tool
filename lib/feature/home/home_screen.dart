@@ -146,6 +146,26 @@ class HomeScreen extends StatelessWidget {
           Divider(
             thickness: 1,
           ),
+          ListTile(
+            leading: Icon(
+              CupertinoIcons.cube_box_fill,
+              size: 30,
+            ),
+            title: const Text(
+              'AR calibration',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+            ),
+            onTap: () {
+              // Get.to(() => (ARWithTFLitePage));
+              Get.to(() => ARCalibrationScreen());
+            },
+          ),
+          Divider(
+            thickness: 1,
+          ),
         ],
       ),
     );

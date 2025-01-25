@@ -12,7 +12,8 @@ class ImageDetectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Image Detection Sample')),
+      appBar:
+          AppBar(title: const Text('Image Detection And Calibration Sample')),
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -20,32 +21,57 @@ class ImageDetectionPage extends StatelessWidget {
             detectionImagesGroupName: 'AR Resources',
             onARKitViewCreated: controller.onARKitViewCreated,
           ),
-          Obx(() {
-            return Stack(
-              children: controller.detectedObjects.entries.map((entry) {
-                final detectedObject = entry.value;
-                return Positioned(
-                  left:
-                      detectedObject.screenPosition.dx - Random().nextInt(100),
-                  top: detectedObject.screenPosition.dy,
-                  child: Container(
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      color: Colors.black54,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      'Name: ${detectedObject.name}\n'
-                      'Width: ${detectedObject.calculatedWidth.toStringAsFixed(2)} m\n'
-                      'Height: ${detectedObject.calculatedHeight.toStringAsFixed(2)} m\n'
-                      'Depth: ${detectedObject.depth.toStringAsFixed(2)} m',
-                      style: const TextStyle(color: Colors.white, fontSize: 16),
-                    ),
+          Positioned(
+            bottom: 20,
+            left: 20,
+            right: 20,
+            child: Obx(() {
+              // Check if any object is detected
+              if (controller.detectedObjects.isEmpty) {
+                return const Text(
+                  "No objects detected.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    backgroundColor: Colors.black54,
                   ),
                 );
-              }).toList(),
-            );
-          }),
+              }
+
+              // Get the first detected object
+              final detectedObject = controller.detectedObjects.values.first;
+
+              return Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Name: ${detectedObject.name}",
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    Text(
+                      "Width: ${detectedObject.calculatedWidth.toStringAsFixed(2)} meters",
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    Text(
+                      "Height: ${detectedObject.calculatedHeight.toStringAsFixed(2)} meters",
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    Text(
+                      "Depth: ${detectedObject.depth.toStringAsFixed(2)} meters",
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ],
+                ),
+              );
+            }),
+          ),
         ],
       ),
     );
