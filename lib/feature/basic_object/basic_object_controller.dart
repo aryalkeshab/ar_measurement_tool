@@ -39,7 +39,6 @@ class BasicObjectController extends GetxController {
     'sphereNode',
     'faceNode',
     'None',
-    'watch-video'
   ];
   String? selectedObject = 'cubeNode';
 
@@ -47,7 +46,6 @@ class BasicObjectController extends GetxController {
     arkitController.remove('cube');
     arkitController.remove('sphereNode');
     arkitController.remove('faceNode');
-    arkitController.remove('videoNode');
 
     update();
   }
@@ -102,38 +100,9 @@ class BasicObjectController extends GetxController {
         position: vector.Vector3(
             0, 0, -0.9), // Place the sphere 0.5 meters in front of the camera
       ));
-    } else if (selectedObject == "watch-video") {
-      hideAll3DObjects();
-      addVideoToARSpace();
     } else {
       hideAll3DObjects();
     }
     update();
-  }
-
-  void addVideoToARSpace() {
-    final videoMaterial = ARKitMaterial(
-      diffuse: ARKitMaterialProperty.video(
-        url:
-            'https://www.youtube.com/watch?v=yDFpreDC6y4&list=RDyDFpreDC6y4&start_radio=1&ab_channel=LuanaCamaraM%C3%BAsicas%26V%C3%ADdeos',
-        width: 1,
-        height: 1,
-        autoplay: true,
-        filename: 'video.mp4',
-      ),
-    );
-
-    final videoNode = ARKitNode(
-      geometry: ARKitPlane(
-        width: 0.5, // Plane width in meters
-        height: 0.3, // Plane height in meters
-        materials: [videoMaterial],
-      ),
-      name: 'videoNode',
-      position: vector.Vector3(
-          0, 0, -1), // Place the video 1 meter in front of the camera
-    );
-
-    arkitController.add(videoNode);
   }
 }

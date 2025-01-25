@@ -1,14 +1,12 @@
+import 'package:ar_measurement_tool/core/widgets/menu_items_widget.dart';
 import 'package:ar_measurement_tool/feature/basic_calibration/basic_calibration_page.dart';
 import 'package:ar_measurement_tool/feature/basic_object/basic_object.dart';
-import 'package:ar_measurement_tool/feature/googleml/object_detector_view.dart';
 import 'package:ar_measurement_tool/feature/image_tracking/image_detection_page.dart';
 import 'package:ar_measurement_tool/feature/measurement/measure_page.dart';
-import 'package:ar_measurement_tool/feature/object_detection/ui/detector_widget.dart';
+import 'package:ar_measurement_tool/feature/object_detection/object_detection_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = "/home";
@@ -17,159 +15,59 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController());
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Measurement Application',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.blue,
+        centerTitle: true,
+        elevation: 5,
       ),
-      body: Column(
-        children: [
-          ListTile(
-            leading: const Icon(
-              Icons.calculate,
-              size: 30,
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: ListView(
+          children: [
+            MenuItem(
+              icon: Icons.calculate,
+              title: 'Measurement Screen',
+              subtitle:
+                  'Select multiple points to detect distances in both inch and cm scale.',
+              onTap: () => Get.toNamed(MeasurePage.routeName),
             ),
-            title: const Text(
-              'Measurement Screen',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-              ),
+            const SizedBox(height: 10),
+            MenuItem(
+              icon: CupertinoIcons.cube_box_fill,
+              title: 'Basic 3D Object',
+              subtitle: 'Shows and hides different 3D objects in AR View.',
+              onTap: () => Get.toNamed(Basic3DObjectPage.routeName),
             ),
-            onTap: () {
-              Get.toNamed(MeasurePage.routeName);
-            },
-          ),
-          Divider(
-            thickness: 1,
-          ),
-          ListTile(
-            leading: Icon(
-              CupertinoIcons.cube_box_fill,
-              size: 30,
+            const SizedBox(height: 10),
+            MenuItem(
+              icon: CupertinoIcons.cube_box_fill,
+              title: 'Image Detection in AR',
+              subtitle:
+                  'Detects a fish image and calculates its size in AR View.',
+              onTap: () => Get.toNamed(ImageDetectionPage.routeName),
             ),
-            title: const Text(
-              'Basic 3D Object',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-              ),
+            const SizedBox(height: 10),
+            MenuItem(
+              icon: Icons.calculate_outlined,
+              title: 'Basic Calibration',
+              subtitle: 'Helps calibrate and scale virtual objects in AR View.',
+              onTap: () => Get.toNamed(BasicCalibrationPage.routeName),
             ),
-            onTap: () {
-              Get.toNamed(Basic3DObjectPage.routeName);
-            },
-          ),
-          Divider(
-            thickness: 1,
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.calculate_outlined,
-              size: 30,
+            const SizedBox(height: 10),
+            MenuItem(
+              icon: CupertinoIcons.cube_box_fill,
+              title: 'Object Detection',
+              subtitle: 'Object detection using the normal camera.',
+              onTap: () => Get.toNamed(ObjectDetectionScreen.routeName),
             ),
-            title: const Text(
-              'Basic Calibration',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-              ),
-            ),
-            onTap: () {
-              Get.toNamed(
-                BasicCalibrationPage.routeName,
-              );
-            },
-          ),
-          Divider(
-            thickness: 1,
-          ),
-          ListTile(
-            leading: Icon(
-              CupertinoIcons.cube_box_fill,
-              size: 30,
-            ),
-            title: const Text(
-              'Object Detection',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-              ),
-            ),
-            onTap: () {
-              Get.toNamed(ObjectDetectorView.routeName);
-            },
-          ),
-          Divider(
-            thickness: 1,
-          ),
-          ListTile(
-            leading: Icon(
-              CupertinoIcons.cube_box_fill,
-              size: 30,
-            ),
-            title: const Text(
-              'Tflite detection',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-              ),
-            ),
-            onTap: () {
-              // Get.to(() => (ARWithTFLitePage));
-              Get.to(() => ObjectDetectionScreen());
-            },
-          ),
-          Divider(
-            thickness: 1,
-          ),
-          ListTile(
-            leading: Icon(
-              CupertinoIcons.cube_box_fill,
-              size: 30,
-            ),
-            title: const Text(
-              'Image Detection in AR',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-              ),
-            ),
-            onTap: () {
-              // Get.to(() => (ARWithTFLitePage));
-              Get.to(() => ImageDetectionPage());
-            },
-          ),
-          Divider(
-            thickness: 1,
-          ),
-          ListTile(
-            leading: Icon(
-              CupertinoIcons.cube_box_fill,
-              size: 30,
-            ),
-            title: const Text(
-              'AR calibration',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-              ),
-            ),
-            onTap: () {
-              // Get.to(() => (ARWithTFLitePage));
-              Get.to(() => ARCalibrationScreen());
-            },
-          ),
-          Divider(
-            thickness: 1,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
-
-class ARWithTFLitePage {}

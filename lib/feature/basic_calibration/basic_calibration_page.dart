@@ -4,107 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
-import 'basic_calibration_controller.dart';
-
-// class BasicCalibrationPage extends StatelessWidget {
-//   static String routeName = "/basic_calibration";
-
-//   const BasicCalibrationPage({super.key});
-//   @override
-//   Widget build(BuildContext context) {
-//     Get.put(BasicCalibrationController());
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Colors.blue,
-//         title: Text('AR Calibration View'),
-//         leading: IconButton(
-//           icon: const Icon(
-//             Icons.arrow_back,
-//             color: Colors.white,
-//           ),
-//           onPressed: () {
-//             Get.offAllNamed(HomeScreen.routeName);
-//           },
-//         ),
-//       ),
-//       body: GetBuilder<BasicCalibrationController>(builder: (c) {
-//         return Stack(
-//           children: [
-//             ARKitSceneView(
-//               onARKitViewCreated: c.onARKitViewCreated,
-//               showFeaturePoints: true,
-//               planeDetection: ARPlaneDetection.horizontal,
-//               configuration: ARKitConfiguration.worldTracking,
-//             ),
-//           ],
-//         );
-//       }),
-//     );
-//   }
-// }
-class BasicCalibrationPage extends StatelessWidget {
+class BasicCalibrationPage extends StatefulWidget {
   static String routeName = "/basic_calibration";
 
-  const BasicCalibrationPage({super.key});
+  const BasicCalibrationPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    Get.put(BasicCalibrationController());
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: const Text('AR Calibration View'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Get.offAllNamed('/home');
-          },
-        ),
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              Get.find<BasicCalibrationController>()
-                  .changeMeasurementUnit(value);
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'cm',
-                child: Text('Centimeters (cm)'),
-              ),
-              const PopupMenuItem(
-                value: 'inch',
-                child: Text('Inches (inch)'),
-              ),
-            ],
-          ),
-        ],
-      ),
-      body: GetBuilder<BasicCalibrationController>(builder: (controller) {
-        return Stack(
-          children: [
-            ARKitSceneView(
-              onARKitViewCreated: controller.onARKitViewCreated,
-              planeDetection: ARPlaneDetection.horizontal,
-              showFeaturePoints: true,
-              enableTapRecognizer: true,
-              configuration: ARKitConfiguration.worldTracking,
-            ),
-          ],
-        );
-      }),
-    );
-  }
+  State<BasicCalibrationPage> createState() => _BasicCalibrationPageState();
 }
 
-class ARCalibrationScreen extends StatefulWidget {
-  const ARCalibrationScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ARCalibrationScreen> createState() => _ARCalibrationScreenState();
-}
-
-class _ARCalibrationScreenState extends State<ARCalibrationScreen> {
+class _BasicCalibrationPageState extends State<BasicCalibrationPage> {
   late ARKitController arkitController;
   String? anchorId;
   ARKitPlane? plane;
@@ -214,10 +123,6 @@ class _ARCalibrationScreenState extends State<ARCalibrationScreen> {
       plane?.width.value = planeAnchor.extent.x;
       plane?.height.value = planeAnchor.extent.z;
     });
-
-    print(
-        'Node Position: ${node?.position.x}, ${node?.position.y}, ${node?.position.z}');
-    print('Plane Dimensions: ${plane?.width.value}, ${plane?.height.value}');
   }
 
   void updateReferenceObjectScale() {

@@ -1,19 +1,36 @@
 import 'dart:math';
 
+import 'package:ar_measurement_tool/feature/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'image_detection_controller.dart';
 
 class ImageDetectionPage extends StatelessWidget {
+  static const String routeName = "/image-detection";
+
   final ImageDetectionController controller =
       Get.put(ImageDetectionController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          AppBar(title: const Text('Image Detection And Calibration Sample')),
+      appBar: AppBar(
+        title: const Text(
+          'Image Detection And Calibration Sample',
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Get.offAllNamed(HomeScreen.routeName);
+          },
+        ),
+        backgroundColor: Colors.blue,
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [

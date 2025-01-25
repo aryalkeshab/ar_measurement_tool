@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ar_measurement_tool/feature/image_tracking/detected_object_model.dart';
+import 'package:ar_measurement_tool/core/models/detected_object_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
